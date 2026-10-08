@@ -6,37 +6,23 @@ const planResult = document.getElementById("planResult");
 
 const strategies = {
   Zetterburn: {
-    xp: "Tu dois focuser sur les rushes rapides, engager les fights en zone ouverte et sortir les bonus d'xp à l'attaque directe.",
-    resources: "Priorise les routes avec des cartes courtes et des collisions favorables pour maximiser ton gain de ressources sans prendre de risques",
-    rank: "Le bon plan est d'entrer dans les matches au bon timing, avec pression constante et fin de route agressive.",
-    practice: "Travaille les conversions, les schimmies et les récupérations après chaque attaque pour garder un rythme élevé."
+    xp: "Tu dois viser les rushes rapides, pousser la pression en zone ouverte et convertir les bonus XP avant la fin du run.",
+    resources: "Choisis une route courte avec des engagements décisifs pour maximiser l'efficacité de tes ressources sans trop de risque.",
+    rank: "Le bon plan est d'entrer en pression à bonne cadence, de garder le tempo et d'attaquer la fin de route agressivement.",
+    practice: "Travaille les conversions, les schimmies et les reprises après pression pour garder un rythme de jeu élevé."
   },
   Orcane: {
-    xp: "Cherche les maps plus longues, contrôle la zone et sécurise tes bonus pendant les phases de tempo moyen.",
-    resources: "Suis un rythme plus stable, sans rush prématuré, pour éviter les pertes et garder un farming régulier.",
-    rank: "Le plan idéal est de jouer au contrôle, d'anticiper les échanges et de convertir la pression en gains sûrs.",
-    practice: "Exerce-toi sur les défenses, les mouvements de zone et la gestion de la distance pour monter en fiabilité."
+    xp: "Planifie un tempo moyen, contrôle la zone et sécurise tes bonus pendant les phases de fight plus stables.",
+    resources: "Priorise les routes fiables avec peu de variations de profondeur pour un farming régulier et sûr.",
+    rank: "Le meilleur plan est de jouer une pression contrôlée, d'anticiper les échanges et de convertir la stabilité en gains.",
+    practice: "Exerce-toi sur les défenses, les mouvements latéraux et les reprises de distance pour monter en fiabilité."
   },
   Kragg: {
-    xp: "Concentre-toi sur les routes plus sûres avec des engagements contrôlés et des conversions en fin de map.",
-    resources: "Choisis des chemins plus protecteurs, avec moins de risques de mort, et maximise tes échanges en sécurité.",
-    rank: "Joue en supériorité de stabilité, garde ton tempo et profite des erreurs de l'adversaire pour sécuriser la progression.",
-    practice: "Travaille la patience, le timing d'attaque et l'anticipation pour convertir tes avantages en fin de run."
+    xp: "Focalise-toi sur des routes plus sûres, avec des engagements mesurés et des conversions au bon moment.",
+    resources: "Privilégie les chemins protecteurs, moins de risques de mort et une gestion forte de la zone.",
+    rank: "Joue en supériorité de stabilité, garde ton tempo et profite des erreurs adverses pour sécuriser la progression.",
+    practice: "Travaille la patience, le timing d'attaque et la lecture de la distance pour maximiser ta pression."
   },
   Forsburn: {
-    xp: "Mixe pression et mobilité pour exploiter les espaces larges, puis termine les loops sur des routes rapides.",
-    resources: "Utilise un style plus adaptable, en gardant des déplacements qui évitent les erreurs coûteuses.",
-    rank: "Le gain vient du tempo, des conversions rapides et d'une exécution propre en fin d'échange.",
-    practice: "Perfectionne les chaînes et les resets pour améliorer la fluidité de tes actions et ton timing."
-  },
-  Wrastor: {
-    xp: "Joue sur la mobilité et la création d'espace, avec le bon timing pour convertir les openings en exploit.",
-    resources: "Concentre-toi sur le contrôle de la zone, puis converti tes avantages en gains stables et répétables.",
-    rank: "Le meilleur plan est d'exploiter l'initiative, d'agir en tempo et de finir les échanges proprement.",
-    practice: "Travailler les mouvements de repli, les combos et la reprise d'initiative est la meilleure progression."
-  }
-};
-
-const difficultyNotes = {
-  low: "Reste sur des routes sûres, minimises les risques et privilégie le gain régulier.",
-  mid: "Balance entre vitesse et sécurité pour maintenir un bon ratio d'efficacité.
+    xp: "Mélange mobilité et pression pour exploiter les espaces larges, puis finis les loops sur des routes rapides.",
+    resources: "Utilise un schéma adaptable et garde des déplacements qui limitent les erreurs coûteuses.
