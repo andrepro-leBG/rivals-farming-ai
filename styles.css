@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FarmForge AI — Rivals Farming Assistant</title>
+    <meta
+      name="description"
+      content="FarmForge AI aide les joueurs de Rivals of Aether à optimiser leurs runs, leurs builds et leurs routes de farming."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="logo-mark">F</div>
+          <div class="brand-copy">
+            <span class="brand-name">FarmForge AI</span>
+            <span class="brand-tag">Rivals of Aether</span>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a href="#features">Fonctionnalités</a>
+          <a href="#routes">Routes</a>
+          <a href="#assistant">Assistant</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+
+        <button class="nav-cta">Essai gratuit</button>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">IA de farming pour Rivals</p>
+            <h1>
+              Trouve les runs les plus efficaces pour <span>farm ton grind</span>
+            </h1>
+            <p class="lede">
+              Planifie tes routes, optimise ta progression et reçois des recommandations
+              de farming adaptées à ton personnage, ton niveau et tes objectifs.
+            </p>
+
+            <div class="action-row">
+              <button class="primary-btn">Créer mon plan</button>
+              <button class="secondary-btn">Voir les routes</button>
+            </div>
+
+            <ul class="hero-stats">
+              <li>
+                <strong>2.4x</strong>
+                <span>Plus rapide</span>
+              </li>
+              <li>
+                <strong>24/7</strong>
+                <span>Analyse IA</span>
+              </li>
+              <li>
+                <strong>120+</strong>
+                <span>Routes validées</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-visual">
+            <div class="visual-panel">
+              <div class="panel-header">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+
+              <div class="analysis-card">
+                <div class="analysis-top">
+                  <span>Plan de farming</span>
+                  <span class="pill success">optimal</span>
+                </div>
+
+                <div class="route-list">
+                  <div class="route-row">
+                    <span>1. Grotte solaire</span>
+                    <strong>12 min</strong>
+                  </div>
+                  <div class="route-row">
+                    <span>2. Route de l’aube</span>
+                    <strong>18 min</strong>
+                  </div>
+                  <div class="route-row">
+                    <span>3. Bonus de rush</span>
+                    <strong>+22%</strong>
+                  </div>
+                </div>
+
+                <div class="mini-graph">
+                  <span style="height: 35%"></span>
+                  <span style="height: 52%"></span>
+                  <span style="height: 72%"></span>
+                  <span style="height: 86%"></span>
+                  <span style="height: 100%"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" class="section feature-section">
+          <div class="section-header">
+            <p class="eyebrow small">Pourquoi c’est utile</p>
+            <h2>Un système d’aide au farming pensé pour les vrais runs</h2>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="icon">⚡</div>
+              <h3>Routes optimisées</h3>
+              <p>Calcule les meilleurs chemins selon ton personnage, ton niveau et les récompenses ciblées.</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">🧠</div>
+              <h3>Conseils IA</h3>
+              <p>Reçoit des recommandations de timing, de rush, de bonus d’xp et de drops à viser.</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon">🛡️</div>
+              <h3>Builds cohérents</h3>
+              <p>Associe les meilleurs stats, équipements et stratégies à chaque phase de progression.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="routes" class="section route-section">
+          <div class="section-header left">
+            <p class="eyebrow small">Routes populaires</p>
+            <h2>Les parcours les plus rentables</h2>
+          </div>
+
+          <div class="character-grid">
+            <div class="character-card accent-orange">
+              <div class="avatar">Z</div>
+              <div class="meta">
+                <h3>Zetterburn</h3>
+                <p>Rush rapide, pressure agressive, route de fin de map.</p>
+              </div>
+              <span class="score">96% optimal</span>
+            </div>
+
+            <div class="character-card accent-blue">
+              <div class="avatar">O</div>
+              <div class="meta">
+                <h3>Orcane</h3>
+                <p>Farming de contrôle et de tempo pour runs plus sûrs.</p>
+              </div>
+              <span class="score">91% optimal</span>
+            </div>
+
+            <div class="character-card accent-green">
+              <div class="avatar">K</div>
+              <div class="meta">
+                <h3>Kragg</h3>
+                <p>Stratégie de sécurité, pressure lente et loops efficace.</p>
+              </div>
+              <span class="score">89% optimal</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="assistant" class="section planner-section">
+          <div class="planner-copy">
+            <p class="eyebrow small">Assistant IA</p>
+            <h2>Génère un plan de farming en quelques secondes</h2>
+            <p>
+              Sélectionne ton personnage, ton objectif et le type de run que tu veux faire.
+              L’IA te propose une route plus rentable, plus sécurisée et mieux adaptée à ta progression.
+            </p>
+          </div>
+
+          <div class="planner-box">
+            <div class="input-group">
+              <label for="character">Personnage</label>
+              <select id="character">
+                <option value="Zetterburn">Zetterburn</option>
+                <option value="Orcane">Orcane</option>
+                <option value="Kragg">Kragg</option>
+                <option value="Forsburn">Forsburn</option>
+                <option value="Wrastor">Wrastor</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="goal">Objectif</label>
+              <select id="goal">
+                <option value="xp">Farm XP</option>
+                <option value="resources">Ressources</option>
+                <option value="rank">Rank / progression</option>
+                <option value="practice">Pratique / combos</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="difficulty">Niveau</label>
+              <select id="difficulty">
+                <option value="low">Débutant</option>
+                <option value="mid">Intermédiaire</option>
+                <option value="high">Avancé</option>
+              </select>
+            </div>
+
+            <button id="generatePlan" class="primary-btn full">Générer le plan</button>
+
+            <div id="planResult" class="plan-result" aria-live="polite">
+              <h3>Plan recommandé</h3>
+              <p>Choisis un personnage et un objectif pour générer une route.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" class="section cta-section">
+          <div class="cta-card">
+            <div>
+              <p class="eyebrow small">Prêt à gagner du temps ?</p>
+              <h2>Transforme ton grind en progression intelligente</h2>
+            </div>
+            <button class="primary-btn">Commencer</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
