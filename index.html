@@ -1,331 +1,1032 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FarmForge AI | Rivals of Aether Farming Assistant</title>
-    <meta
-      name="description"
-      content="FarmForge AI est l'assistant IA premium pour optimiser ton farming, tes routes et tes builds sur Rivals of Aether."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="noise"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmForge AI - Rivals Farming Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <header class="topbar">
-      <div class="container-topbar">
-        <div class="brand">
-          <div class="brand-mark">F</div>
-          <div class="brand-copy">
-            <span class="brand-name">FarmForge AI</span>
-            <span class="brand-subtitle">Rivals of Aether</span>
-          </div>
+        :root {
+            --bg: #080d18;
+            --bg-soft: #101a2e;
+            --text: #edf3ff;
+            --muted: #9eadc8;
+            --orange: #ff8d3a;
+            --blue: #5ab0ff;
+            --green: #6ae7a6;
+            --line: rgba(148, 163, 184, 0.14);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, rgba(90, 176, 255, 0.1) 0%, rgba(255, 141, 58, 0.08) 100%), var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            background: rgba(8, 13, 24, 0.8);
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--orange), #ff6b3d);
+            border-radius: 10px;
+            color: white;
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        .brand-copy {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .brand-tag {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--orange), #ff6b3d);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text);
+        }
+
+        .btn.small {
+            padding: 8px 16px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .eyebrow.subtle {
+            color: var(--blue);
+        }
+
+        h1 {
+            font-size: 56px;
+            line-height: 1.1;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #ffd6a0, var(--orange), #ff5e62);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .lead {
+            font-size: 18px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 550px;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        .hero-stats li {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hero-stats strong {
+            font-size: 24px;
+            color: var(--text);
+        }
+
+        .hero-stats span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .dashboard-panel {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff6b6b; }
+        .dot.yellow { background: #ffd166; }
+        .dot.green { background: #7ae582; }
+
+        .dashboard-card {
+            background: linear-gradient(180deg, rgba(13, 18, 30, 0.8), rgba(12, 17, 27, 0.8));
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .dashboard-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge.success {
+            background: rgba(106, 231, 166, 0.15);
+            color: var(--green);
+        }
+
+        .route-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .route-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(148, 163, 184, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .route-line span {
+            color: var(--muted);
+        }
+
+        .route-line strong {
+            color: var(--text);
+        }
+
+        .mini-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 100px;
+            padding: 0 8px;
+        }
+
+        .mini-chart span {
+            flex: 1;
+            background: linear-gradient(180deg, var(--blue), var(--orange));
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header.left-align {
+            text-align: left;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 28px 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 141, 58, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .character-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 24px;
+        }
+
+        .character-card.orange .avatar {
+            background: rgba(255, 141, 58, 0.2);
+            color: #ffb067;
+        }
+
+        .character-card.blue .avatar {
+            background: rgba(90, 176, 255, 0.2);
+            color: #9bd4ff;
+        }
+
+        .character-card.green .avatar {
+            background: rgba(106, 231, 166, 0.2);
+            color: #8ff0bb;
+        }
+
+        .card-copy h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .card-copy p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .card-score {
+            margin-left: auto;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Assistant Section */
+        .assistant-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .planner-panel {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .btn.full {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .plan-result {
+            margin-top: 24px;
+            padding: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+        }
+
+        .plan-result h3 {
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .plan-result p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Social Proof */
+        .proof-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255, 141, 58, 0.1), rgba(90, 176, 255, 0.08));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .proof-copy h3 {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .proof-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .proof-metrics div {
+            text-align: center;
+        }
+
+        .proof-metrics strong {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--orange);
+        }
+
+        .proof-metrics span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .pricing-card {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 32px 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 141, 58, 0.3);
+        }
+
+        .pricing-card.highlight {
+            background: linear-gradient(135deg, rgba(255, 141, 58, 0.15), rgba(90, 176, 255, 0.08));
+            border: 1px solid rgba(255, 141, 58, 0.4);
+            transform: scale(1.05);
+        }
+
+        .plan-name {
+            display: inline-block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: var(--orange);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .pricing-card li {
+            padding: 10px 0;
+            color: var(--muted);
+            font-size: 14px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 32px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-inner,
+            .assistant-layout,
+            .feature-grid,
+            .character-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 42px;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .proof-card {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.highlight {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .cta-row {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="topbar">
+                <div class="brand">
+                    <div class="brand-mark">F</div>
+                    <div class="brand-copy">
+                        <span class="brand-name">FarmForge AI</span>
+                        <span class="brand-tag">Rivals of Aether</span>
+                    </div>
+                </div>
+
+                <nav class="nav">
+                    <a href="#features">Fonctionnalités</a>
+                    <a href="#routes">Routes</a>
+                    <a href="#assistant">Assistant</a>
+                    <a href="#pricing">Prix</a>
+                </nav>
+
+                <button class="btn btn-primary small">Essai gratuit</button>
+            </div>
         </div>
-
-        <nav class="nav" aria-label="Navigation principale">
-          <a href="#features">Fonctionnalités</a>
-          <a href="#routes">Routes</a>
-          <a href="#assistant">Assistant</a>
-          <a href="#pricing">Prix</a>
-        </nav>
-
-        <button class="btn btn-primary small">Essai gratuit</button>
-      </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="container">
-          <div class="hero-inner">
-            <div class="hero-copy">
-              <span class="eyebrow">IA de farming pour Rivals</span>
-              <h1>
-                Le farming intelligent qui te fait <span>gagner du temps</span> et du grind.
-              </h1>
-              <p class="lead">
-                Planifie tes routes, optimise tes builds et découvre la meilleure stratégie de farming
-                selon ton personnage, ton objectif et ton progression.
-              </p>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-inner">
+                    <div class="hero-copy">
+                        <span class="eyebrow">IA de farming pour Rivals</span>
+                        <h1>Le farming intelligent qui te fait <span>gagner du temps</span> et du grind.</h1>
+                        <p class="lead">Planifie tes routes, optimise tes builds et découvre la meilleure stratégie de farming selon ton personnage, ton objectif et ta progression.</p>
 
-              <div class="cta-row">
-                <button class="btn btn-primary">Créer mon plan</button>
-                <button class="btn btn-secondary">Voir les routes</button>
-              </div>
+                        <div class="cta-row">
+                            <button class="btn btn-primary">Créer mon plan</button>
+                            <button class="btn btn-secondary">Voir les routes</button>
+                        </div>
 
-              <ul class="hero-stats">
-                <li>
-                  <strong>2.4x</strong>
-                  <span>plus rapide</span>
-                </li>
-                <li>
-                  <strong>24/7</strong>
-                  <span>analyse IA</span>
-                </li>
-                <li>
-                  <strong>120+</strong>
-                  <span>routes validées</span>
-                </li>
-              </ul>
+                        <ul class="hero-stats">
+                            <li>
+                                <strong>2.4x</strong>
+                                <span>plus rapide</span>
+                            </li>
+                            <li>
+                                <strong>24/7</strong>
+                                <span>analyse IA</span>
+                            </li>
+                            <li>
+                                <strong>120+</strong>
+                                <span>routes validées</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="dashboard-panel">
+                            <div class="panel-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+
+                            <div class="dashboard-card">
+                                <div class="dashboard-top">
+                                    <span>Run plan</span>
+                                    <span class="badge success">Optimal</span>
+                                </div>
+
+                                <div class="route-lines">
+                                    <div class="route-line">
+                                        <span>Route 01</span>
+                                        <strong>12 min</strong>
+                                    </div>
+                                    <div class="route-line">
+                                        <span>Route 02</span>
+                                        <strong>18 min</strong>
+                                    </div>
+                                    <div class="route-line">
+                                        <span>Bonus XP</span>
+                                        <strong>+22%</strong>
+                                    </div>
+                                </div>
+
+                                <div class="mini-chart">
+                                    <span style="height: 35%"></span>
+                                    <span style="height: 48%"></span>
+                                    <span style="height: 64%"></span>
+                                    <span style="height: 79%"></span>
+                                    <span style="height: 100%"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="hero-visual" aria-label="Aperçu du dashboard">
-              <div class="dashboard-panel">
-                <div class="panel-header">
-                  <span class="dot red"></span>
-                  <span class="dot yellow"></span>
-                  <span class="dot green"></span>
+        <section id="features" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow subtle">Pourquoi c'est utile</span>
+                    <h2>Un assistant de farming pensé pour les vrais runs.</h2>
                 </div>
 
-                <div class="dashboard-card">
-                  <div class="dashboard-top">
-                    <span>Run plan</span>
-                    <span class="badge success">Optimal</span>
-                  </div>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Routes optimisées</h3>
+                        <p>Calcule les meilleurs chemins selon ton personnage, ton niveau et tes objectifs de progression.</p>
+                    </article>
 
-                  <div class="route-lines">
-                    <div class="route-line">
-                      <span>Route 01</span>
-                      <strong>12 min</strong>
-                    </div>
-                    <div class="route-line">
-                      <span>Route 02</span>
-                      <strong>18 min</strong>
-                    </div>
-                    <div class="route-line">
-                      <span>Bonus XP</span>
-                      <strong>+22%</strong>
-                    </div>
-                  </div>
+                    <article class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Conseils IA</h3>
+                        <p>Reçoit des recommandations de timing, rush, XP, ressources et fin de run sans perdre de temps.</p>
+                    </article>
 
-                  <div class="mini-chart" aria-hidden="true">
-                    <span style="height: 35%"></span>
-                    <span style="height: 48%"></span>
-                    <span style="height: 64%"></span>
-                    <span style="height: 79%"></span>
-                    <span style="height: 100%"></span>
-                  </div>
+                    <article class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Builds cohérents</h3>
+                        <p>Associe stat, équipement et stratégie pour renforcer ta progression et ton efficacité de farming.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Progression mesurée</h3>
+                        <p>Suivi clair de ta rentabilité, de ton rythme et des meilleurs moments pour viser plus haut.</p>
+                    </article>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="features" class="section">
-        <div class="container">
-          <div class="section-header">
-            <span class="eyebrow subtle">Pourquoi c'est utile</span>
-            <h2>Un assistant de farming pensé pour les vrais runs.</h2>
-          </div>
+        <section id="routes" class="section">
+            <div class="container">
+                <div class="section-header left-align">
+                    <span class="eyebrow subtle">Routes populaires</span>
+                    <h2>Les parcours les plus rentables.</h2>
+                </div>
 
-          <div class="feature-grid">
-            <article class="feature-card">
-              <div class="feature-icon">⚡</div>
-              <h3>Routes optimisées</h3>
-              <p>Calcule les meilleurs chemins selon ton personnage, ton niveau et tes objectifs de progression.</p>
-            </article>
+                <div class="character-grid">
+                    <article class="character-card orange">
+                        <div class="avatar">Z</div>
+                        <div class="card-copy">
+                            <h3>Zetterburn</h3>
+                            <p>Rush agressif, routes courtes et pressure sur le territoire.</p>
+                        </div>
+                        <span class="card-score">96% optimal</span>
+                    </article>
 
-            <article class="feature-card">
-              <div class="feature-icon">🧠</div>
-              <h3>Conseils IA</h3>
-              <p>Reçoit des recommandations de timing, rush, XP, ressources et fin de run sans perdre de temps.</p>
-            </article>
+                    <article class="character-card blue">
+                        <div class="avatar">O</div>
+                        <div class="card-copy">
+                            <h3>Orcane</h3>
+                            <p>Tempo contrôlé, sécurité et gestion de lane plus stable.</p>
+                        </div>
+                        <span class="card-score">91% optimal</span>
+                    </article>
 
-            <article class="feature-card">
-              <div class="feature-icon">🛡️</div>
-              <h3>Builds cohérents</h3>
-              <p>Associe stat, équipement et stratégie pour renforcer ta progression et ton efficacité de farming.</p>
-            </article>
-
-            <article class="feature-card">
-              <div class="feature-icon">📈</div>
-              <h3>Progression mesurée</h3>
-              <p>Suivi clair de ta rentabilité, de ton rythme et des meilleurs moments pour viser plus haut.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="routes" class="section">
-        <div class="container">
-          <div class="section-header left-align">
-            <span class="eyebrow subtle">Routes populaires</span>
-            <h2>Les parcours les plus rentables.</h2>
-          </div>
-
-          <div class="character-grid">
-            <article class="character-card orange">
-              <div class="avatar">Z</div>
-              <div class="card-copy">
-                <h3>Zetterburn</h3>
-                <p>Rush agressif, routes courtes et pressure sur le territoire.</p>
-              </div>
-              <span class="card-score">96% optimal</span>
-            </article>
-
-            <article class="character-card blue">
-              <div class="avatar">O</div>
-              <div class="card-copy">
-                <h3>Orcane</h3>
-                <p>Tempo contrôlé, sécurité et gestion de lane plus stable.</p>
-              </div>
-              <span class="card-score">91% optimal</span>
-            </article>
-
-            <article class="character-card green">
-              <div class="avatar">K</div>
-              <div class="card-copy">
-                <h3>Kragg</h3>
-                <p>Stratégie plus défensive avec bonus de sécurité et contrôle.</p>
-              </div>
-              <span class="card-score">89% optimal</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="assistant" class="section">
-        <div class="container">
-          <div class="assistant-layout">
-            <div class="assistant-copy">
-              <span class="eyebrow subtle">Assistant IA</span>
-              <h2>Génère un plan de farming en quelques secondes.</h2>
-              <p>
-                Donne ta cible, ton personnage et ton niveau. L'IA te propose la route la plus rentable,
-                la plus fiable et la mieux adaptée à ton niveau de progression.
-              </p>
+                    <article class="character-card green">
+                        <div class="avatar">K</div>
+                        <div class="card-copy">
+                            <h3>Kragg</h3>
+                            <p>Stratégie plus défensive avec bonus de sécurité et contrôle.</p>
+                        </div>
+                        <span class="card-score">89% optimal</span>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <div class="planner-panel">
-              <div class="input-group">
-                <label for="character">Personnage</label>
-                <select id="character">
-                  <option value="Zetterburn">Zetterburn</option>
-                  <option value="Orcane">Orcane</option>
-                  <option value="Kragg">Kragg</option>
-                  <option value="Forsburn">Forsburn</option>
-                  <option value="Wrastor">Wrastor</option>
-                </select>
-              </div>
+        <section id="assistant" class="section">
+            <div class="container">
+                <div class="assistant-layout">
+                    <div class="assistant-copy">
+                        <span class="eyebrow subtle">Assistant IA</span>
+                        <h2>Génère un plan de farming en quelques secondes.</h2>
+                        <p>Donne ta cible, ton personnage et ton niveau. L'IA te propose la route la plus rentable, la plus fiable et la mieux adaptée à ton niveau de progression.</p>
+                    </div>
 
-              <div class="input-group">
-                <label for="goal">Objectif</label>
-                <select id="goal">
-                  <option value="xp">Farm XP</option>
-                  <option value="resources">Ressources</option>
-                  <option value="rank">Progression / rank</option>
-                  <option value="practice">Pratique / combos</option>
-                </select>
-              </div>
+                    <div class="planner-panel">
+                        <div class="input-group">
+                            <label for="character">Personnage</label>
+                            <select id="character">
+                                <option value="Zetterburn">Zetterburn</option>
+                                <option value="Orcane">Orcane</option>
+                                <option value="Kragg">Kragg</option>
+                                <option value="Forsburn">Forsburn</option>
+                                <option value="Wrastor">Wrastor</option>
+                            </select>
+                        </div>
 
-              <div class="input-group">
-                <label for="difficulty">Niveau</label>
-                <select id="difficulty">
-                  <option value="low">Débutant</option>
-                  <option value="mid">Intermédiaire</option>
-                  <option value="high">Avancé</option>
-                </select>
-              </div>
+                        <div class="input-group">
+                            <label for="goal">Objectif</label>
+                            <select id="goal">
+                                <option value="xp">Farm XP</option>
+                                <option value="resources">Ressources</option>
+                                <option value="rank">Progression / rank</option>
+                                <option value="practice">Pratique / combos</option>
+                            </select>
+                        </div>
 
-              <button id="generatePlan" class="btn btn-primary full">Générer mon plan</button>
+                        <div class="input-group">
+                            <label for="difficulty">Niveau</label>
+                            <select id="difficulty">
+                                <option value="low">Débutant</option>
+                                <option value="mid">Intermédiaire</option>
+                                <option value="high">Avancé</option>
+                            </select>
+                        </div>
 
-              <div id="planResult" class="plan-result" aria-live="polite">
-                <h3>Plan recommandé</h3>
-                <p>Choisis ton personnage, ton objectif et ton niveau pour générer une route.</p>
-              </div>
+                        <button id="generatePlan" class="btn btn-primary full">Générer mon plan</button>
+
+                        <div id="planResult" class="plan-result">
+                            <h3>Plan recommandé</h3>
+                            <p>Choisis ton personnage, ton objectif et ton niveau pour générer une route.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="proof-card">
-            <div class="proof-copy">
-              <span class="eyebrow subtle">Satisfaction</span>
-              <h3>Les joueurs gagnent plus de temps et plus de rythme.</h3>
+        <section class="section">
+            <div class="container">
+                <div class="proof-card">
+                    <div class="proof-copy">
+                        <span class="eyebrow subtle">Satisfaction</span>
+                        <h3>Les joueurs gagnent plus de temps et plus de rythme.</h3>
+                    </div>
+
+                    <div class="proof-metrics">
+                        <div>
+                            <strong>4.9/5</strong>
+                            <span>note moyenne</span>
+                        </div>
+                        <div>
+                            <strong>86%</strong>
+                            <span>routes optimisées</span>
+                        </div>
+                        <div>
+                            <strong>3.2h</strong>
+                            <span>gain hebdo</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="proof-metrics">
-              <div>
-                <strong>4.9/5</strong>
-                <span>note moyenne</span>
-              </div>
-              <div>
-                <strong>86%</strong>
-                <span>routes optimisées</span>
-              </div>
-              <div>
-                <strong>3.2h</strong>
-                <span>gain hebdo</span>
-              </div>
+        <section id="pricing" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow subtle">Prix</span>
+                    <h2>Choisis le plan qui te correspond.</h2>
+                </div>
+
+                <div class="pricing-grid">
+                    <article class="pricing-card">
+                        <span class="plan-name">Starter</span>
+                        <h3>Gratuit</h3>
+                        <div class="price">0€</div>
+                        <ul>
+                            <li>2 plans de farming</li>
+                            <li>Routes de base</li>
+                            <li>1 personnage</li>
+                        </ul>
+                        <button class="btn btn-secondary full">Essayer</button>
+                    </article>
+
+                    <article class="pricing-card highlight">
+                        <span class="plan-name">Pro</span>
+                        <h3>9,99€/mois</h3>
+                        <div class="price">9.99€</div>
+                        <ul>
+                            <li>Plans IA illimités</li>
+                            <li>Routes premium</li>
+                            <li>Builds détaillés</li>
+                        </ul>
+                        <button class="btn btn-primary full">Commencer</button>
+                    </article>
+
+                    <article class="pricing-card">
+                        <span class="plan-name">Elite</span>
+                        <h3>19,99€/mois</h3>
+                        <div class="price">19.99€</div>
+                        <ul>
+                            <li>Tout le pack Pro</li>
+                            <li>Analyse avancée</li>
+                            <li>Support prioritaire</li>
+                        </ul>
+                        <button class="btn btn-secondary full">Découvrir</button>
+                    </article>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing" class="section">
-        <div class="container">
-          <div class="section-header">
-            <span class="eyebrow subtle">Prix</span>
-            <h2>Choisis le plan qui te correspond.</h2>
-          </div>
-
-          <div class="pricing-grid">
-            <article class="pricing-card">
-              <span class="plan-name">Starter</span>
-              <h3>Gratuit</h3>
-              <div class="price">0€</div>
-              <ul>
-                <li>2 plans de farming</li>
-                <li>Routes de base</li>
-                <li>1 personnage</li>
-              </ul>
-              <button class="btn btn-secondary full">Essayer</button>
-            </article>
-
-            <article class="pricing-card highlight">
-              <span class="plan-name">Pro</span>
-              <h3>9,99€/mois</h3>
-              <div class="price">9.99€</div>
-              <ul>
-                <li>Plans IA illimités</li>
-                <li>Routes premium</li>
-                <li>Builds détaillés</li>
-              </ul>
-              <button class="btn btn-primary full">Commencer</button>
-            </article>
-
-            <article class="pricing-card">
-              <span class="plan-name">Elite</span>
-              <h3>19,99€/mois</h3>
-              <div class="price">19.99€</div>
-              <ul>
-                <li>Tout le pack Pro</li>
-                <li>Analyse avancée</li>
-                <li>Support prioritaire</li>
-              </ul>
-              <button class="btn btn-secondary full">Découvrir</button>
-            </article>
-          </div>
-        </div>
-      </section>
+        </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <span>FarmForge AI © 2026</span>
-        <span>Optimise ton grind, pas ta patience.</span>
-      </div>
+    <footer>
+        <div class="container">
+            <span>FarmForge AI © 2026</span>
+            <span> | Optimise ton grind, pas ta patience.</span>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
-  </body>
+    <script>
+        const characterSelect = document.getElementById('character');
+        const goalSelect = document.getElementById('goal');
+        const difficultySelect = document.getElementById('difficulty');
+        const generatePlanButton = document.getElementById('generatePlan');
+        const planResult = document.getElementById('planResult');
+
+        const strategies = {
+            Zetterburn: {
+                xp: 'Tu dois viser les rushes rapides, pousser la pression en zone ouverte et convertir les bonus XP avant la fin du run.',
+                resources: 'Choisis une route courte avec des engagements décisifs pour maximiser l\'efficacité de tes ressources.',
+                rank: 'Le bon plan est d\'entrer en pression à bonne cadence, de garder le tempo et d\'attaquer agressivement.',
+                practice: 'Travaille les conversions, les combos et les reprises pour garder un rythme de jeu élevé.'
+            },
+            Orcane: {
+                xp: 'Planifie un tempo moyen, contrôle la zone et sécurise tes bonus pendant les phases de fight.',
+                resources: 'Priorise les routes fiables avec peu de variations pour un farming régulier et sûr.',
+                rank: 'Joue une pression contrôlée, anticipe les échanges et convertis la stabilité en gains.',
+                practice: 'Exerce-toi sur les défenses, les mouvements latéraux et la reprise de distance.'
+            },
+            Kragg: {
+                xp: 'Focalise-toi sur des routes plus sûres, avec des engagements mesurés et des conversions au bon moment.',
+                resources: 'Privilégie les chemins protecteurs, moins de risques et une gestion forte de la zone.',
+                rank: 'Joue en supériorité de stabilité, garde ton tempo et profite des erreurs adverses.',
+                practice: 'Travaille la patience, le timing d\'attaque et la lecture de la distance.'
+            },
+            Forsburn: {
+                xp: 'Mélange mobilité et pression pour exploiter les espaces larges et finir les loops rapidement.',
+                resources: 'Utilise un schéma adaptable et garde des déplacements qui limitent les erreurs coûteuses.',
+                rank: 'Le gain vient du tempo, des conversions rapides et d\'une exécution propre.',
+                practice: 'Perfectionne les chaînes et les resets pour améliorer la fluidité de tes actions.'
+            },
+            Wrastor: {
+                xp: 'Joue sur la mobilité et la création d\'espace, avec le bon timing pour convertir les openings.',
+                resources: 'Concentre-toi sur le contrôle de la zone, puis converti tes avantages en gains stables.',
+                rank: 'Le meilleur plan est d\'exploiter l\'initiative, d\'agir en tempo et de finir proprement.',
+                practice: 'Travaille les mouvements de repli, les combos et la reprise d\'initiative.'
+            }
+        };
+
+        generatePlanButton.addEventListener('click', function() {
+            const character = characterSelect.value;
+            const goal = goalSelect.value;
+            const difficulty = difficultySelect.value;
+
+            if (character && goal && difficulty) {
+                const strategy = strategies[character][goal];
+                planResult.innerHTML = `
+                    <h3>Plan pour ${character}</h3>
+                    <p><strong>Objectif:</strong> ${goal === 'xp' ? 'Farm XP' : goal === 'resources' ? 'Ressources' : goal === 'rank' ? 'Progression / rank' : 'Pratique / combos'}</p>
+                    <p><strong>Niveau:</strong> ${difficulty === 'low' ? 'Débutant' : difficulty === 'mid' ? 'Intermédiaire' : 'Avancé'}</p>
+                    <p><strong>Stratégie:</strong></p>
+                    <p style="margin-top: 12px; font-style: italic;">${strategy}</p>
+                `;
+            }
+        });
+    </script>
+</body>
 </html>
